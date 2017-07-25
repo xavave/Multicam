@@ -52,6 +52,7 @@ namespace ThreeCamerasTest
                     throw new Exception();
                 }
 
+
                 for (int i = 1, n = videoDevices.Count; i <= n; i++)
                 {
                     string cameraName = i + " : " + videoDevices[i - 1].Name;
@@ -84,14 +85,13 @@ namespace ThreeCamerasTest
                     camera3Combo.Items.Add("Only two cameras found");
                     camera3Combo.SelectedIndex = 0;
                     camera3Combo.Enabled = false;
-                    videoSource2.ProvideSnapshots = true;
-                    videoSource2.SnapshotFrame += new NewFrameEventHandler(VideoSource_SnapshotFrame);
+                   
+                 
                 }
                 else if (videoDevices.Count == 3)
                 {
                     camera3Combo.SelectedIndex = 1;
-                    videoSource3.ProvideSnapshots = true;
-                    videoSource3.SnapshotFrame += new NewFrameEventHandler(VideoSource_SnapshotFrame);
+                   
                 }
                 camera1Combo.SelectedIndex = 0;
             }
@@ -156,7 +156,6 @@ namespace ThreeCamerasTest
             if (camera2Combo.Enabled == true)
             {
                 System.Threading.Thread.Sleep(500);
-
                 videoSource2 = new VideoCaptureDevice(videoDevices[camera2Combo.SelectedIndex].MonikerString);
                 videoSource2.ProvideSnapshots = true;
                 videoSource2.SnapshotFrame += new NewFrameEventHandler(VideoSource_SnapshotFrame);
@@ -278,13 +277,13 @@ namespace ThreeCamerasTest
                     btnSave1.Visible = true;
                     break;
                 case 2:
-                    pictureBox2.Image = Image.FromHbitmap(videoSourcePlayer1.GetCurrentVideoFrame().GetHbitmap());
+                    pictureBox2.Image = Image.FromHbitmap(videoSourcePlayer2.GetCurrentVideoFrame().GetHbitmap());
                     img = pictureBox2.Image;
                     btnSave2.Visible = true;
 
                     break;
                 case 3:
-                    pictureBox3.Image = Image.FromHbitmap(videoSourcePlayer1.GetCurrentVideoFrame().GetHbitmap());
+                    pictureBox3.Image = Image.FromHbitmap(videoSourcePlayer3.GetCurrentVideoFrame().GetHbitmap());
                     img = pictureBox2.Image;
                     btnSave3.Visible = true;
 
